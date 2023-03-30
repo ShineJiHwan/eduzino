@@ -31,6 +31,8 @@ public class UserLoginCheckAdvice {
 			}
 		}
 		
+		logger.info(request.getRequestURI());
+		
 		//로그인을 체크해야 되는 경우와, 그냥 보내야 하는경우를 나눈다 
 		String uri=request.getRequestURI(); 
 		
@@ -55,7 +57,7 @@ public class UserLoginCheckAdvice {
 			//로그인이 필요한 서비스에서만 아래의 코드들이 수행되어야 한다..
 			session = request.getSession();
 			
-			if(session.getAttribute("admin")==null) {
+			if(session.getAttribute("member")==null) {
 				logger.info("aop 에 의한 로그인 체크 : 세션없음");
 				throw new AdminException("로그인이 필요한 서비스입니다");
 			}else {

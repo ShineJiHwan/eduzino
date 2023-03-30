@@ -25,7 +25,6 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public List selectAll() {
-		// TODO Auto-generated method stub
 		return teacherDAO.selectAll();
 	}
 

@@ -23,6 +23,8 @@ import com.edu.zino.chat.model.MessageService;
 import com.edu.zino.domain.Chat;
 import com.edu.zino.domain.Member;
 import com.edu.zino.domain.Message;
+import com.edu.zino.domain.Teacher;
+import com.edu.zino.model.teacher.TeacherService;
 import com.edu.zino.util.MessageUtil;
 
 
@@ -37,6 +39,8 @@ public class RestMessageController {
 	@Autowired
 	private MessageService messageService;
 	
+	@Autowired
+	private TeacherService teacherService;
 	
 	//강사가 채팅방 조회
 	@PostMapping("/teacher/chat/message/selectAll")
@@ -46,6 +50,10 @@ public class RestMessageController {
 		HttpSession session = request.getSession();
         Member member = (Member)session.getAttribute("member");
         
+        int teacher_member_idx = member.getMember_idx();
+        
+        Teacher teacher = teacherService.select(teacher_member_idx);
+        member.setTeacher(teacher);
 		
         /*
 		//로그인 하면 session에서 로그인 정보를 가져오므로 get으로 가져올 필요는 없음
@@ -68,14 +76,6 @@ public class RestMessageController {
 	//강사가 채팅방 생성
 	@PostMapping("/teacher/chat/message")
 	public Chat insertTeacher(HttpServletRequest request, @RequestBody Chat chat){
-		
-		
-		//logger.info("member_idx is "+member_idx);
-		logger.info("chat is "+chat);
-		
-		HttpSession session = request.getSession();
-        Member member = (Member)session.getAttribute("member");
-		
 		/*
 		//로그인 하면 session에서 로그인 정보를 가져오므로 get으로 가져올 필요는 없음
 		Member member = new Member();
@@ -84,6 +84,19 @@ public class RestMessageController {
 			int member_teacher_idx = 1;
 			member.setMember_idx(member_teacher_idx);
 			*/
+		
+		//logger.info("member_idx is "+member_idx);
+		logger.info("chat is "+chat);
+		
+		HttpSession session = request.getSession();
+        Member member = (Member)session.getAttribute("member");
+        
+        int teacher_member_idx = member.getMember_idx();
+        
+        Teacher teacher = teacherService.select(teacher_member_idx);
+        member.setTeacher(teacher);
+		
+
 		
 			chat.setMember_teacher(member);
 	

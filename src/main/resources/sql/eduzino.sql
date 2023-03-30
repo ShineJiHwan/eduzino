@@ -49,18 +49,9 @@ CREATE TABLE admin (
 	admin_idx	number		NOT NULL,
 	admin_id	varchar2(100)		,
 	admin_pass	varchar2(64)		,
-	grade_idx number not null
-	rank_idx number not null
 );
 
-CREATE TABLE grade (
-	grade_idx	number		NOT NULL,
-	grade_rank	number		NULL
-);
 
-review ON COLUMN grade.grade_rank IS '1: 최상위 관리자
-2: 중간관리자
-3:하급관리자';
 
 CREATE TABLE top_category (
 	top_category_idx	number		NOT NULL,
@@ -259,10 +250,6 @@ ALTER TABLE member ADD CONSTRAINT PK_MEMBER PRIMARY KEY (
 	member_idx
 );
 
-<<<<<<< HEAD
-ALTER TABLE birthday ADD CONSTRAINT PK_BIRTHDAY PRIMARY KEY (
-	birthday_idx
-);
 
 ALTER TABLE birthday ADD CONSTRAINT PK_birthday PRIMARY KEY (
 	birthday_idx

@@ -188,6 +188,8 @@ public class MemberController {
 			//member에 대한 고유 id 조희 : 회원인지 아닌지 따져보기 위해서 
 			Member member = memberService.selectById(id);
 			
+			logger.info("db들가는 타이밍"+member);
+			
 			if(member==null) {
 			//회원여부를 판단. 이미 db에 이 회원의 식별 고유 id가 존재할 경우 회원가입을 처리해주자 (서비스의 insert) 세션에 담자 
 				

@@ -1,13 +1,9 @@
 -- fk 제약조건
-ALTER TABLE member ADD CONSTRAINT FK_sns_name_TO_member_1 FOREIGN KEY (
-<<<<<<< HEAD
-	social_login_idx
-=======
-	sns_name_idx
->>>>>>> 090364d14f2248e255f6a980387b9adb6e56c4f0
+ALTER TABLE member ADD CONSTRAINT FK_sns_TO_member_1 FOREIGN KEY (
+	sns_idx
 )
-REFERENCES sns_name (
-	sns_name_idx
+REFERENCES sns (
+	sns_idx
 );
 
 ALTER TABLE blacklist ADD CONSTRAINT FK_member_TO_blacklist_1 FOREIGN KEY (
