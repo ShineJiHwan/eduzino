@@ -7,7 +7,7 @@ create sequence seq_sns_name
 increment by 1
 start with 1;
 
-<<<<<<< HEAD
+
 create sequence seq_birthday
 increment by 1
 start with 1;
@@ -20,8 +20,7 @@ create sequence seq_email
 increment by 1
 start with 1;
 
-=======
->>>>>>> 090364d14f2248e255f6a980387b9adb6e56c4f0
+
 create sequence seq_teacher
 increment by 1
 start with 1;
