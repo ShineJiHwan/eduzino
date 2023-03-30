@@ -1,4 +1,9 @@
+
+<%@page import="com.edu.zino.domain.QnaboardFnq"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%
+	QnaboardFnq qnaboardfnq=(QnaboardFnq)request.getAttribute("qnaboardfnq");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +15,12 @@
 <!-- plugins:css -->
 <jsp:include page="../inc/header_link.jsp"></jsp:include>
 </head>
+<style type="text/css">
+.bte{
+	text-align: center;
+}
+
+</style>
 <body>
 	<div class="container-scroller">
 		<!-- partial:partials/_sidebar.html -->
@@ -51,43 +62,43 @@
 			<div class="main-panel">
 				<div class="content-wrapper pb-0">
 					<div class="page-header flex-wrap">
-						<div class="header-right"></div>
+						<div class="header-reght"></div>
 
 					</div>
 
-					<!-- table row starts here -->
 					<!-- table row starts here -->
 					<div class="container" role="main">
 
 						<h2>qna게시판 글 등록</h2>
 
-						<form id="form1">
-
+						<form  id="form1">
 							<div class="mb-3">
-
+							
+								<input type="hidden" name="qnaboardfnq_idx"  value="<%=qnaboardfnq.getQnaboardfnq_idx()%>">
 								<label>제목</label> <input type="text" class="form-control"
-									name="qnaboard_title" placeholder="제목을 입력해 주세요">
+									name="qnaboardfnq_title" value="<%=qnaboardfnq.getQnaboardfnq_title()%>">
 
 							</div>
 
 							<div class="mb-3">
 
-								<labe>내용</label> <textarea class="form-control" rows="5"
-									name="qnaboard_content" placeholder="내용을 입력해 주세요"></textarea>
+								<label>내용</label> 
+								<textarea class="form-control" rows="5"
+									name="qnaboardfnq_content" ><%=qnaboardfnq.getQnaboardfnq_content()%></textarea>
 							</div>
 
 						</form>
 
-						<div>
-
-							<button type="button" class="btn btn-sm btn-primary"
-								id="bt_regist">등록</button>
-
-							<button type="button" class="btn btn-sm btn-primary" id="bt_list">목록</button>
+						<div class="bte">
+							
+							<button type="button" class="btn btn-sm btn-primary"  id="bt_edit" >수정</button>
+							<button type="button" class="btn btn-sm btn-primary"  id="bt_list">목록</button>
 
 						</div>
 
 					</div>
+		
+
 					<!-- content-wrapper ends -->
 					<!-- partial:partials/_footer.html -->
 					<jsp:include page="../inc/footer.jsp"></jsp:include>
@@ -106,21 +117,23 @@
 		<!-- End custom js for this page -->
 	</div>
 	<script type="text/javascript">
-		function regist(){
-			$("#form1").attr({
-				action : "/admin/qnaboard_service/regist",
-				method: "POST"
-			});
-			$("#form1").submit();
-		}
-		$(function(){
-			$("#bt_regist").click(function(){
-				regist();
-			});
-			$("#bt_list").click(function(){
-				location.href="/admin/qnaboard_service/list"
-			});
+	$(function(){
+		$("#bt_edit").click(function(){
+			if(confirm("수정하실래요?")){
+				$("#form1").attr({
+					action: "/admin/qnaboard_fnq/edit" ,
+					method:"POST"
+				});
+				$("#form1").submit();
+			}
 		});
+	
+		$("#bt_list").click(function(){
+			location.href="/admin/qnaboard_fnq/list";
+		});
+	});
+
+	
 	</script>
 </body>
 

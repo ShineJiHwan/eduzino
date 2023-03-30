@@ -98,6 +98,12 @@
 		select * from member
 		where member_id = #{member_id}
 	</select>
+	
+	<!-- 강사 정보로 member 정보가져오기 -->
+    <select id="selectByTeacher" resultType="Member" parameterType="int">
+        select * from member where member_idx=#{member_idx}
+    </select>
+
 		
 	<!-- 회원가입 등록 -->
 	<insert id="insert" parameterType="Member">

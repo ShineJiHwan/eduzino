@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QnaboardVid">
+
+	<resultMap type="QnaboardVid" id="QnaboardVidMap">
+	<id column="qnaboardvid_idx" property="qnaboardvid_idx"/>
+	<result column="qnaboardvid_title" property="qnaboardvid_title"/>
+	<result column="qnaboardvid_content" property="qnaboardvid_content"/>
+	<result column="qnaboardvid_regdate" property="qnaboardvid_regdate"/>
+	
+	<association column="admin_idx" property="admin"
+						javaType="Admin" select="Admin.select"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="QnaboardVidMap">
+		select * from qnaboardvid
+	</select>
+	
+	<select id="select" resultMap="QnaboardVidMap" parameterType="int">
+		select * from qnaboardvid where qnaboardvid_idx=#{qnaboardvid_idx}
+	</select>
+	
+	<insert id="insert" parameterType="QnaboardVid">
+		insert into qnaboardvid(qnaboardvid_idx,qnaboardvid_title,qnaboardvid_content,qnaboardvid_regdate,admin_idx)
+		values(seq_qnaboardvid.nextval,#{qnaboardvid_title},#{qnaboardvid_content},sysdate,#{admin.admin_idx})
+	</insert>
+	
+	<update id="update" parameterType="QnaboardVid">
+		update qnaboardvid set qnaboardvid_title=#{qnaboardvid_title},qnaboardvid_content=#{qnaboardvid_content},admin_idx=#{admin.admin_idx}
+		where qnaboardvid_idx=#{qnaboardvid_idx}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from qnaboardvid where qnaboardvid_idx=#{qnaboardvid_idx}
+	</delete>
+
+</mapper>

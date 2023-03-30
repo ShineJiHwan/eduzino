@@ -1,11 +1,10 @@
 
-<%@page import="com.edu.zino.domain.Qnaboard"%>
-<%@page import="com.edu.zino.model.admin.MybatisAdminboardDAO"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="com.edu.zino.domain.Adminboard"%>
-<%@page import="java.util.List"%>
+<%@page import="com.edu.zino.domain.QnaboardPay"%>
+<%@page import="com.edu.zino.domain.QnaboardFnq"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%List qnaboardList=(List) request.getAttribute("qnaboardList"); %>
+<%
+	QnaboardPay qnaboardpay=(QnaboardPay)request.getAttribute("qnaboardpay");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +17,10 @@
 <jsp:include page="../inc/header_link.jsp"></jsp:include>
 </head>
 <style type="text/css">
+.bte{
+	text-align: center;
+}
+
 </style>
 <body>
 	<div class="container-scroller">
@@ -60,47 +63,42 @@
 			<div class="main-panel">
 				<div class="content-wrapper pb-0">
 					<div class="page-header flex-wrap">
-						<div class="header-right"></div>
+						<div class="header-reght"></div>
 
 					</div>
 
 					<!-- table row starts here -->
-					<div class="col-sm-15 col-xl-11 stretch-card grid-margin">
-						<div class="card">
-							<div class="card-body">
-								<form id="form1">
-									<div class="d-flex border-bottom mb-4 pb-2">
-										<div class="hexagon">
-											<div class="hex-mid hexagon-danger">
-												<i class="mdi mdi-book-open-variant"></i>
-											</div>
-										</div>
-										<div class="pl-4">
-											<h4 class="font-weight-bold text-danger mb-0">서비스 소개 및 이용문의</h4>
-											<h6 class="text-muted">zinoedu</h6>
-										</div>
+					<div class="container" role="main">
 
-									</div>
-									<%for ( int i=0; i<qnaboardList.size(); i++){ %>
-									<%Qnaboard qnaboard=(Qnaboard)qnaboardList.get(i); %>
-									<div class="d-flex border-bottom mb-4 pb-2"><%=i %>
-										<div class="hexagon"></div>
-										<div class="pl-4">
-											<a href="/admin/qnaboard_service/detail?qnaboard_idx=<%=qnaboard.getQnaboard_idx()%>"><%=qnaboard.getQnaboard_title() %></a></h4>
-											<h6 class="text-muted">zinoedu</h6>
+						<h2>qna게시판 글 등록</h2>
 
-										</div>
-									</div>
-									<% }%>
-									<button type="button" class="btn btn-primary active"
-										id="bt_regist">글쓰기 등록</button>
-										<button type="button" class="btn btn-primary active"
-										id="bt_list"> 목록</button>
-								</form>
+						<form  id="form1">
+							<div class="mb-3">
+							
+								<input type="hidden" name="qnaboardpay_idx"  value="<%=qnaboardpay.getQnaboardpay_idx()%>">
+								<label>제목</label> <input type="text" class="form-control"
+									name="qnaboardpay_title" value="<%=qnaboardpay.getQnaboardpay_title()%>">
+
 							</div>
-						</div>
-					</div>
 
+							<div class="mb-3">
+
+								<label>내용</label> 
+								<textarea class="form-control" rows="5"
+									name="qnaboardpay_content" ><%=qnaboardpay.getQnaboardpay_content()%></textarea>
+							</div>
+
+						</form>
+
+						<div class="bte">
+							
+							<button type="button" class="btn btn-sm btn-primary"  id="bt_edit" >수정</button>
+							<button type="button" class="btn btn-sm btn-primary"  id="bt_list">목록</button>
+
+						</div>
+
+					</div>
+		
 
 					<!-- content-wrapper ends -->
 					<!-- partial:partials/_footer.html -->
@@ -120,26 +118,24 @@
 		<!-- End custom js for this page -->
 	</div>
 	<script type="text/javascript">
-	
-		function regist(){
-			$("#form1").attr({
-				action : "/admin/qnaboard_service/registform",
-				method:"GET"
-			});
-			$("#form1").submit();
-		}
-		
-		$(function(){
-			$("#bt_regist").click(function(){
-				regist();
-			});
-			
-			$("#bt_list").click(function(){
-				location.href="/admin/qnaboard";
-			});
+	$(function(){
+		$("#bt_edit").click(function(){
+			if(confirm("수정하실래요?")){
+				$("#form1").attr({
+					action: "/admin/qnaboard_pay/edit" ,
+					method:"POST"
+				});
+				$("#form1").submit();
+			}
 		});
-	</script>
+	
+		$("#bt_list").click(function(){
+			location.href="/admin/qnaboard_pay/list";
+		});
+	});
 
+	
+	</script>
 </body>
 
 </html>

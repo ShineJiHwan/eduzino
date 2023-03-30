@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QnaboardFnq">
+
+	<resultMap type="QnaboardFnq" id="QnaboardFnqMap">
+	<id column="qnaboardfnq_idx" property="qnaboardfnq_idx"/>
+	<result column="qnaboardfnq_title" property="qnaboardfnq_title"/>
+	<result column="qnaboardfnq_content" property="qnaboardfnq_content"/>
+	<result column="qnaboardfnq_regdate" property="qnaboardfnq_regdate"/>
+	
+	<association column="admin_idx" property="admin"
+						javaType="Admin" select="Admin.select"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="QnaboardFnqMap">
+		select * from qnaboardfnq
+	</select>
+	
+	<select id="select" resultMap="QnaboardFnqMap" parameterType="int">
+		select * from qnaboardfnq where qnaboardfnq_idx=#{qnaboardfnq_idx}
+	</select>
+	
+	<insert id="insert" parameterType="QnaboardFnq">
+		insert into qnaboardfnq(qnaboardfnq_idx,qnaboardfnq_title,qnaboardfnq_content,qnaboardfnq_regdate,admin_idx)
+		values(seq_qnaboardfnq.nextval,#{qnaboardfnq_title},#{qnaboardfnq_content},sysdate,#{admin.admin_idx})
+	</insert>
+	
+	<update id="update" parameterType="QnaboardFnq">
+		update qnaboardfnq set qnaboardfnq_title=#{qnaboardfnq_title},qnaboardfnq_content=#{qnaboardfnq_content},admin_idx=#{admin.admin_idx}
+		where qnaboardfnq_idx=#{qnaboardfnq_idx}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from qnaboardfnq where qnaboardfnq_idx=#{qnaboardfnq_idx}
+	</delete>
+
+</mapper>

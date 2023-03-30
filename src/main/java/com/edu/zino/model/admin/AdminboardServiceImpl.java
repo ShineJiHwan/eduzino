@@ -20,7 +20,6 @@ public class AdminboardServiceImpl implements AdminboardService{
 	
 	
 	public List selectAll() {
-		System.out.println(adminboardDAO.selectAll());
 		return adminboardDAO.selectAll();
 	}
 

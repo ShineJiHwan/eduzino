@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QnaboardPay">
+
+	<resultMap type="QnaboardPay" id="QnaboardPayMap">
+	<id column="qnaboardpay_idx" property="qnaboardpay_idx"/>
+	<result column="qnaboardpay_title" property="qnaboardpay_title"/>
+	<result column="qnaboardpay_content" property="qnaboardpay_content"/>
+	<result column="qnaboardpay_regdate" property="qnaboardpay_regdate"/>
+	
+	<association column="admin_idx" property="admin"
+						javaType="Admin" select="Admin.select"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="QnaboardPayMap">
+		select * from qnaboardpay
+	</select>
+	
+	<select id="select" resultMap="QnaboardPayMap" parameterType="int">
+		select * from qnaboardpay where qnaboardpay_idx=#{qnaboardpay_idx}
+	</select>
+	
+	<insert id="insert" parameterType="QnaboardPay">
+		insert into qnaboardpay(qnaboardpay_idx,qnaboardpay_title,qnaboardpay_content,qnaboardpay_regdate,admin_idx)
+		values(seq_qnaboardpay.nextval,#{qnaboardpay_title},#{qnaboardpay_content},sysdate,#{admin.admin_idx})
+	</insert>
+	
+	<update id="update" parameterType="QnaboardPay">
+		update qnaboardpay set qnaboardpay_title=#{qnaboardpay_title},qnaboardpay_content=#{qnaboardpay_content},admin_idx=#{admin.admin_idx}
+		where qnaboardpay_idx=#{qnaboardpay_idx}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from qnaboardpay where qnaboardpay_idx=#{qnaboardpay_idx}
+	</delete>
+
+</mapper>

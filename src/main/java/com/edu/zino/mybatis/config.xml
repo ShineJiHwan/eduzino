@@ -7,7 +7,6 @@
 		<!-- 관리자 -->
 		<typeAlias type="com.edu.zino.domain.Admin" alias="Admin"/>
 		<typeAlias type="com.edu.zino.domain.Grade" alias="Grade"/>
-		<typeAlias type="com.edu.zino.domain.Qnaboard" alias="Qnaboard"/>
 		<typeAlias type="com.edu.zino.domain.Target" alias="Target" />
 		<typeAlias type="com.edu.zino.domain.Adminboard" alias="Adminboard"/>
 				
@@ -57,6 +56,11 @@
 		<typeAlias type="com.edu.zino.domain.Grade" alias="Grade"/>
 		<typeAlias type="com.edu.zino.domain.Target" alias="Target"/>
 		
+		<!-- 관리자 qnaboard -->
+		<typeAlias type="com.edu.zino.domain.QnaboardFnq" alias="QnaboardFnq"/>
+		<typeAlias type="com.edu.zino.domain.QnaboardPay" alias="QnaboardPay"/>
+		<typeAlias type="com.edu.zino.domain.QnaboardAcc" alias="QnaboardAcc"/>
+		<typeAlias type="com.edu.zino.domain.QnaboardVid" alias="QnaboardVid"/>
 	</typeAliases>
 	
 	<mappers>
@@ -68,7 +72,6 @@
 		<mapper resource="com/edu/zino/mybatis/AdminMapper.xml"/>
 		<mapper resource="com/edu/zino/mybatis/GradeMapper.xml"/>
 		<mapper resource="com/edu/zino/mybatis/AdminboardMapper.xml" />
-		<mapper resource="com/edu/zino/mybatis/QnaboardMapper.xml" />
 		<mapper resource="com/edu/zino/mybatis/TargetMapper.xml" />
 		
 		<!-- 회원 -->
@@ -107,6 +110,11 @@
 		<mapper resource="com/edu/zino/mybatis/MessageMapper.xml"/>
 		<mapper resource="com/edu/zino/mybatis/ChatMapper.xml"/>
 		
+		<!-- 관리자 qnaboard -->
+		<mapper resource="com/edu/zino/mybatis/QnaboardFnqMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/QnaboardPayMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/QnaboardAccMapper.xml"/>
+		<mapper resource="com/edu/zino/mybatis/QnaboardVidMapper.xml"/>
 		
 		<mapper resource="com/edu/zino/mybatis/TargetMapper.xml"/>
 	</mappers>

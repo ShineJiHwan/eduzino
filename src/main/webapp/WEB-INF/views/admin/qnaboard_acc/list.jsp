@@ -1,11 +1,15 @@
 
+<%@page import="com.edu.zino.domain.QnaboardAcc"%>
+<%@page import="com.edu.zino.domain.QnaboardPay"%>
 <%@page import="com.edu.zino.domain.QnaboardFnq"%>
 <%@page import="com.edu.zino.model.admin.MybatisAdminboardDAO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.edu.zino.domain.Adminboard"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%List qnaboardfnqList=(List) request.getAttribute("qnaboardfnqList"); %>
+<%
+	List qnaboardaccList = (List) request.getAttribute("qnaboardaccList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,31 +75,40 @@
 								<form id="form1">
 									<div class="d-flex border-bottom mb-4 pb-2">
 										<div class="hexagon">
-											<div class="hex-mid hexagon-warning">
-												<i class="mdi mdi-book-variant"></i>
+											<div class="hex-mid hexagon-info">
+													<i class="mdi mdi-account"></i>
 											</div>
 										</div>
 										<div class="pl-4">
-											<h4 class="font-weight-bold text-warning mb-0">자주 묻는 질문</h4>
+											<h4 class="font-weight-bold text-info mb-0">계정문의</h4>
+
 											<h6 class="text-muted">zinoedu</h6>
 										</div>
 
 									</div>
-									<%for ( int i=0; i<qnaboardfnqList.size(); i++){ %>
-									<%QnaboardFnq qnaboardfnq=(QnaboardFnq)qnaboardfnqList.get(i); %>
-									<div class="d-flex border-bottom mb-4 pb-2"><%=i %>
+									<%
+										for (int i = 0; i < qnaboardaccList.size(); i++) {
+									%>
+									<%
+										QnaboardAcc qnaboardacc = (QnaboardAcc) qnaboardaccList.get(i);
+									%>
+									<div class="d-flex border-bottom mb-4 pb-2"><%=i%>
 										<div class="hexagon"></div>
 										<div class="pl-4">
-											<a href="/admin/qnaboard_fnq/detail?qnaboardfnq_idx=<%=qnaboardfnq.getQnaboardfnq_idx()%>"><%=qnaboardfnq.getQnaboardfnq_title() %></a></h4>
+											<a
+												href="/admin/qnaboard_acc/detail?qnaboardacc_idx=<%=qnaboardacc.getQnaboardacc_idx()%>"><%=qnaboardacc.getQnaboardacc_title()%></a>
+											</h4>
 											<h6 class="text-muted">zinoedu</h6>
 
 										</div>
 									</div>
-									<% }%>
+									<%
+										}
+									%>
 									<button type="button" class="btn btn-primary active"
 										id="bt_regist">글쓰기 등록</button>
-										<button type="button" class="btn btn-primary active"
-										id="bt_list"> 목록</button>
+									<button type="button" class="btn btn-primary active"
+										id="bt_list">목록</button>
 								</form>
 							</div>
 						</div>
@@ -120,22 +133,21 @@
 		<!-- End custom js for this page -->
 	</div>
 	<script type="text/javascript">
-	
-		function regist(){
+		function regist() {
 			$("#form1").attr({
-				action : "/admin/qnaboard_fnq/registform",
-				method:"GET"
+				action : "/admin/qnaboard_acc/registform",
+				method : "GET"
 			});
 			$("#form1").submit();
 		}
-		
-		$(function(){
-			$("#bt_regist").click(function(){
+
+		$(function() {
+			$("#bt_regist").click(function() {
 				regist();
 			});
-			
-			$("#bt_list").click(function(){
-				location.href="/admin/qnaboard";
+
+			$("#bt_list").click(function() {
+				location.href = "/admin/qnaboard";
 			});
 		});
 	</script>

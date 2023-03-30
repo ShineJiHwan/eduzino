@@ -55,7 +55,7 @@
 				<div class="content-wrapper pb-0">
 					<div class="page-header flex-wrap">
 						<div class="header-reght"></div>
-						<button type="button" class="btn btn-outline-success"
+						<button type="button" class="btn btn-outline-primary"
 							id="bt_regist">글쓰기 등록</button>
 					</div>
 
@@ -79,20 +79,6 @@
 								</div>
 								<div class="d-flex border-bottom mb-4 pb-2">
 									<div class="hexagon">
-										<div class="hex-mid hexagon-danger">
-											<i class="mdi mdi-book-open-variant"></i>
-										</div>
-									</div>
-									<div class="pl-4">
-										<h4 class="font-weight-bold text-danger mb-0">서비스 소개 및
-											이용문의</h4>
-										<h6 class="text-muted">zinoedu</h6>
-										<button type="button" class="btn btn-danger btn-sm" id="bt_service">
-											List</button>
-									</div>
-								</div>
-								<div class="d-flex border-bottom mb-4 pb-2">
-									<div class="hexagon">
 										<div class="hex-mid hexagon-success">
 											<i class="mdi mdi-square-inc-cash"></i>
 										</div>
@@ -100,7 +86,7 @@
 									<div class="pl-4">
 										<h4 class="font-weight-bold text-success mb-0">결제/환불 문의</h4>
 										<h6 class="text-muted">zinoedu</h6>
-										<button type="button" class="btn btn-success btn-sm">
+										<button type="button" class="btn btn-success btn-sm" id="bt_pay">
 											List</button>
 									</div>
 								</div>
@@ -113,7 +99,7 @@
 									<div class="pl-4">
 										<h4 class="font-weight-bold text-info mb-0">계정문의</h4>
 										<h6 class="text-muted">zinoedu</h6>
-										<button type="button" class="btn btn-info btn-sm">
+										<button type="button" class="btn btn-info btn-sm" id="bt_acc">
 											List</button>
 									</div>
 								</div>
@@ -127,20 +113,7 @@
 										<h4 class="font-weight-bold text-primary mb-0">재생 및 사용오류
 										</h4>
 										<h6 class="text-muted mb-0">zinoedu</h6>
-										<button type="button" class="btn btn-primary btn-sm">
-											List</button>
-									</div>
-								</div>
-								<div class="d-flex border-bottom mb-4 pb-2">
-									<div class="hexagon">
-										<div class="hex-mid hexagon-secondary">
-											<i class="mdi mdi-jeepney"></i>
-										</div>
-									</div>
-									<div class="pl-4">
-										<h4 class="font-weight-bold text-sceondary mb-0">준비물 문의</h4>
-										<h6 class="text-muted mb-0">zinoedu</h6>
-										<button type="button" class="btn btn-secondary btn-sm">
+										<button type="button" class="btn btn-primary btn-sm" id="bt_vid">
 											List</button>
 									</div>
 								</div>
@@ -167,6 +140,31 @@
 		<!-- End custom js for this page -->
 	</div>
 	<script type="text/javascript">
+	
+	function vidlist(){
+		$("#form1").attr({
+			action : "/admin/qnaboard_vid/list",
+			method: "/GET"
+		});
+		$("#form1").submit();
+	};
+	
+	function acclist(){
+		$("#form1").attr({
+			action : "/admin/qnaboard_acc/list",
+			method: "/GET"
+		});
+		$("#form1").submit();
+	};
+	
+	function paylist(){
+		$("#form1").attr({
+			action : "/admin/qnaboard_pay/list",
+			method: "/GET"
+		});
+		$("#form1").submit();
+	};
+	
 	function fnqlist(){
 		$("#form1").attr({
 			action : "/admin/qnaboard_fnq/list",
@@ -174,20 +172,18 @@
 		});
 		$("#form1").submit();
 	};
-	
-	function servicelist(){
-		$("#form1").attr({
-			action : "/admin/qnaboard_service/list",
-			method: "GET"
-		});
-		$("#form1").submit();
-	}
 		$(function(){
-			$("#bt_service").click(function(){
-				servicelist();
-			});
 			$("#bt_fnq").click(function(){
 				fnqlist();
+			});
+			$("#bt_pay").click(function(){
+				paylist();
+			});
+			$("#bt_acc").click(function(){
+				acclist();
+			});
+			$("#bt_vid").click(function(){
+				vidlist();
 			});
 		});
 	</script>

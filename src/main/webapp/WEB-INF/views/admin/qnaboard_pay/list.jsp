@@ -1,9 +1,12 @@
-<%@page import="com.edu.zino.domain.Qnaboard"%>
+
+<%@page import="com.edu.zino.domain.QnaboardPay"%>
+<%@page import="com.edu.zino.domain.QnaboardFnq"%>
+<%@page import="com.edu.zino.model.admin.MybatisAdminboardDAO"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="com.edu.zino.domain.Adminboard"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%
-	Qnaboard qnaboard = (Qnaboard) request.getAttribute("qnaboard");
-%>
+<%List qnaboardpayList=(List) request.getAttribute("qnaboardpayList"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +18,7 @@
 <!-- plugins:css -->
 <jsp:include page="../inc/header_link.jsp"></jsp:include>
 </head>
-
 <style type="text/css">
-.btd {
-	text-align: center;
-}
 </style>
 <body>
 	<div class="container-scroller">
@@ -62,40 +61,45 @@
 			<div class="main-panel">
 				<div class="content-wrapper pb-0">
 					<div class="page-header flex-wrap">
-						<div class="header-reght"></div>
+						<div class="header-right"></div>
 
 					</div>
 
 					<!-- table row starts here -->
-					<div class="container" role="main">
+					<div class="col-sm-15 col-xl-11 stretch-card grid-margin">
+						<div class="card">
+							<div class="card-body">
+								<form id="form1">
+									<div class="d-flex border-bottom mb-4 pb-2">
+										<div class="hexagon">
+											<div class="hex-mid hexagon-success">
+											<i class="mdi mdi-square-inc-cash"></i>
+											</div>
+										</div>
+										<div class="pl-4">
+											<h4 class="font-weight-bold text-success mb-0">결제/환불 문의</h4>
+											<h6 class="text-muted">zinoedu</h6>
+										</div>
 
-						<h2>qna게시판 글 등록</h2>
+									</div>
+									<%for ( int i=0; i<qnaboardpayList.size(); i++){ %>
+									<%QnaboardPay qnaboardpay=(QnaboardPay)qnaboardpayList.get(i); %>
+									<div class="d-flex border-bottom mb-4 pb-2"><%=i %>
+										<div class="hexagon"></div>
+										<div class="pl-4">
+											<a href="/admin/qnaboard_pay/detail?qnaboardpay_idx=<%=qnaboardpay.getQnaboardpay_idx()%>"><%=qnaboardpay.getQnaboardpay_title() %></a></h4>
+											<h6 class="text-muted">zinoedu</h6>
 
-						<form id="form1">
-							<div class="mb-3">
-
-								<input type="hidden" name="qnaboard_idx"
-									value="<%=qnaboard.getQnaboard_idx()%>"> <label>제목</label>
-								<input type="text" class="form-control" name="qnaboard_title"
-									value="<%=qnaboard.getQnaboard_title()%>">
-
+										</div>
+									</div>
+									<% }%>
+									<button type="button" class="btn btn-primary active"
+										id="bt_regist">글쓰기 등록</button>
+										<button type="button" class="btn btn-primary active"
+										id="bt_list"> 목록</button>
+								</form>
 							</div>
-
-							<div class="mb-3">
-
-								<label>내용</label>
-								<textarea class="form-control" rows="5" name="qnaboard_content"><%=qnaboard.getQnaboard_content()%></textarea>
-							</div>
-
-						</form>
-
-						<div class="bte">
-
-							<button type="button" class="btn btn-sm btn-primary" id="bt_del">삭제</button>
-							<button type="button" class="btn btn-sm btn-primary" id="bt_list">목록</button>
-
 						</div>
-
 					</div>
 
 
@@ -117,21 +121,26 @@
 		<!-- End custom js for this page -->
 	</div>
 	<script type="text/javascript">
-		$(function() {
-			$("#bt_del").click(function() {
-				if (confirm("삭제하십니까?")) {
-					$("#form1").attr({
-						action : "/admin/qnaboard_service/del",
-						method : "POST"
-					});
-					$("#form1").submit();
-				}
+	
+		function regist(){
+			$("#form1").attr({
+				action : "/admin/qnaboard_pay/registform",
+				method:"GET"
 			});
-			$("#bt_list").click(function() {
-				location.href = "/admin/qnaboard_service/list";
+			$("#form1").submit();
+		}
+		
+		$(function(){
+			$("#bt_regist").click(function(){
+				regist();
+			});
+			
+			$("#bt_list").click(function(){
+				location.href="/admin/qnaboard";
 			});
 		});
 	</script>
+
 </body>
 
 </html>

@@ -59,7 +59,7 @@
                                 <a href="user/mypage" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="mdi mdi-account-circle"></span></a>
                             </div>
                             <div class="header-bar-cart" style="margin-left:0px;">
-                                <a href="#" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="mdi mdi-lock-open-outline"></span></a>
+                                <a href="/member/logout" class="flex justify-content-center align-items-center"></a>
                             </div><!-- .header-bar-search -->
                         </nav><!-- .site-navigation -->
                     </div><!-- .col -->

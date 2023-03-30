@@ -1,7 +1,8 @@
-<%@page import="com.edu.zino.domain.Qnaboard"%>
+
+<%@page import="com.edu.zino.domain.QnaboardFnq"%>
 <%@page import="com.edu.zino.domain.Adminboard"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%Qnaboard qnaboard=(Qnaboard) request.getAttribute("qnaboard"); %>
+<%QnaboardFnq qnaboardfnq=(QnaboardFnq) request.getAttribute("qnaboardfnq"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,20 +74,20 @@
 						<h2>qna게시판 글</h2>
 						<p></p>
 					<form class="form-group" id="form1">
-					<input type="hidden" value="<%=qnaboard.getQnaboard_idx()%>">
+					<input type="hidden" value="<%=qnaboardfnq.getQnaboardfnq_idx()%>">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
 									<th>제목</th>
-									<td><%=qnaboard.getQnaboard_title() %></td>
+									<td><%=qnaboardfnq.getQnaboardfnq_title()%></td>
 								</tr>
 								<tr>
 									<th>작성일</th>
-									<td><%=qnaboard.getQnaboard_regdate() %></td>
+									<td><%=qnaboardfnq.getQnaboardfnq_regdate()%></td>
 								</tr>
 								<tr>
 									<th>내용</th>
-									<td><%=qnaboard.getQnaboard_content() %></td>
+									<td><%=qnaboardfnq.getQnaboardfnq_content()%></td>
 								</tr>
 									
 							</thead>
@@ -96,8 +97,8 @@
 						<br>
 							<div class="ctb">
 								<button type="button" class="btn btn-primary active" id="bt_list" >목록</button>
-								<button type="button" class="btn btn-primary active" id="bt_edit" ><a href="/admin/qnaboard_service/editform?qnaboard_idx=<%=qnaboard.getQnaboard_idx()%>">수정</a></button>
-								<button type="button" class="btn btn-primary active" id="bt_del" ><a href="/admin/qnaboard_service/delform?qnaboard_idx=<%=qnaboard.getQnaboard_idx()%>">삭제</a></button>
+								<button type="button" class="btn btn-primary active" id="bt_edit" ><a href="/admin/qnaboard_fnq/editform?qnaboardfnq_idx=<%=qnaboardfnq.getQnaboardfnq_idx()%>">수정</a></button>
+								<button type="button" class="btn btn-primary active" id="bt_del" ><a href="/admin/qnaboard_fnq/delform?qnaboardfnq_idx=<%=qnaboardfnq.getQnaboardfnq_idx()%>">삭제</a></button>
 							</div>
 							
 				
@@ -123,7 +124,7 @@
 		$(function(){
 			//목록
 			$("#bt_list").click(function(){
-				location.href="/admin/qnaboard_service/list";
+				location.href="/admin/qnaboard_fnq/list";
 			});
 		});
 	</script>
