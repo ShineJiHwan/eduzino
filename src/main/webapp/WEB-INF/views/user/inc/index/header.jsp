@@ -28,19 +28,29 @@
                             </div><!-- .hamburger-menu -->
                             
                             <!-- 로그인/ 로그아웃  -->
-                            <div class="header-bar-cart">
 								<%if(session.getAttribute("member")==null){%>
-                            	
-                                <a href="/member/loginform" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="mdi mdi-lock-outline"></span></a>
-                            </div><!-- .header-bar-search -->
                             <div class="header-bar-cart">
+                                <a href="/member/loginform" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="mdi mdi-lock-outline"></span></a>
+                            </div>
+                            <!-- .header-bar-search -->
                             	 <%}else{%>
 	                            <%
 	                                Member member=(Member)session.getAttribute("member");
 	                            %>
-                                <a href="/member/logout" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="mdi mdi-lock-open-outline"></span></a>
-                                   <%} %>
+                             <div class="header-bar-cart" style="margin-left:0px;">
+                                <a href="/cart/list" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="mdi mdi-cart"></span></a>
                             </div>
+                            <div class="header-bar-cart" style="margin-left:0px;">
+                                <a href="/cart/wishlist" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="mdi mdi-heart"></span></a>
+                            </div>
+                            <div class="header-bar-cart" style="margin-left:0px;">
+                                <a href="/user/mypage" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="mdi mdi-account-circle"></span></a>
+                            </div>
+
+                            <div class="header-bar-cart" style="margin-left:0px;">
+                                <a href="/member/logout" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="mdi mdi-lock-open-outline"></span></a>
+                            </div>
+                                   <%} %>
                             <!-- .header-bar-search -->
                             
                             

@@ -75,7 +75,7 @@
                         <tbody>
 
 							<section id="app_salesTable">
-								<template v-for="orderSummary in orderSummaryList">
+								<template v-for="orderSummary in dateList">
 									<row :key="orderSummary_idx" :obj="orderSummary" />
 								</template>
 							</section>
@@ -178,7 +178,7 @@
   			salesTable
   		},
   		data:{
-  			orderSummaryList:[],
+  			dateList:[],
   		}
   	});
 	
@@ -196,7 +196,7 @@
 			data:JSON.stringify(obj),
 			processData:false, /*query string화 여부*/
 			success:function(result, status, xhr){
-				app_salesTable.orderSummaryList = result;
+				app_salesTable.dateList = result;
 				console.log(result);
 			}
 		});

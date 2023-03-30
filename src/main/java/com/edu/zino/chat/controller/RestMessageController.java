@@ -198,7 +198,7 @@ public class RestMessageController {
 		
 		ResponseEntity entity=new ResponseEntity<MessageUtil>(messageUtil, HttpStatus.OK);
 		
-		return null;
+		return entity;
 	}
 	
 

@@ -129,11 +129,23 @@ public class OrderServiceImpl implements OrderService{
 		@Override
 		public List selectByDate(OrderSummary orderSummary) {
 			
-			List<OrderSummary> orderSummaryList = null;
+			List<OrderSummary> dateList = null;
+			
+			logger.info("selectByDate "+dateList);
+			
+			for(int i=0; i<dateList.size();i++) {
+				OrderSummary dateSales = dateList.get(i);
+				logger.info("추출한 orderSummary는 "+dateSales);
+				String selectDate = dateSales.getOrder_summary_regdate(); //날짜
+				int totalBuy = dateSales.getTotal_buy(); //총 금액
+				
+				
+				
+			}
 			
 			
 			
-			return orderSummaryList;
+			return dateList;
 		}
 		
 		
