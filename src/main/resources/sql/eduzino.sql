@@ -204,6 +204,7 @@ CREATE TABLE teacherboard (
 );
 
 CREATE TABLE message (
+<<<<<<< HEAD
 	message_idx number NOT NULL,
 	message_content clob		,
 	message_regdate date default sysdate	,
@@ -264,7 +265,6 @@ ALTER TABLE birthday ADD CONSTRAINT PK_BIRTHDAY PRIMARY KEY (
 	birthday_idx
 );
 
-=======
 ALTER TABLE birthday ADD CONSTRAINT PK_birthday PRIMARY KEY (
 	birthday_idx
 );
@@ -277,7 +277,6 @@ ALTER TABLE email ADD CONSTRAINT PK_email PRIMARY KEY (
 	email_idx
 );
 
->>>>>>> 090364d14f2248e255f6a980387b9adb6e56c4f0
 ALTER TABLE teacher ADD CONSTRAINT PK_TEACHER PRIMARY KEY (
 	teacher_idx
 );

@@ -36,6 +36,9 @@ public class MessageController {
 		
 		HttpSession session = request.getSession();
         Member member = (Member)session.getAttribute("member");
+        
+        logger.info("session"+session.getAttribute("member"));
+        
         int teacher_idx = member.getTeacher().getTeacher_idx();
 		
 		//로그인 하면 session에서 teacher_idx를 가져오므로 getMapping으로 가져올 필요는 없음

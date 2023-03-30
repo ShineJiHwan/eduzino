@@ -74,3 +74,6 @@ CREATE TABLE order_detail (
 
 select * from subject;
 
+select * from member;
+desc teacher;
+

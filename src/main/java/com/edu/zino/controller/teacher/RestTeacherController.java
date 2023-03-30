@@ -27,9 +27,9 @@ public class RestTeacherController {
 	@PostMapping("/salescaculate/sales")
 	public List<OrderSummary> getSales(HttpServletRequest request, @RequestBody OrderSummary ordersummary){
 		
+		List dateList = orderService.selectByDate(ordersummary);
 		
-		
-		return null;
+		return dateList;
 	}
 	
 }
