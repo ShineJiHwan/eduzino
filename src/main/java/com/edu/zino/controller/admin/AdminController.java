@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.edu.zino.domain.Admin;
 import com.edu.zino.domain.Blacklist;
 import com.edu.zino.domain.Member;
 import com.edu.zino.domain.Teacher;
@@ -69,9 +68,6 @@ public class AdminController {
 	@GetMapping("/login")
 	public ModelAndView getLogin(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("/admin/member/login");
-		Admin admin = new Admin();
-		admin.setAdmin_idx(1);
-		request.getSession().setAttribute("admin", admin);
 		return mav;
 	}
 	
@@ -85,10 +81,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/member/detail")	//회원 한 명 상세보기 
-	public ModelAndView getMemberDetail(HttpServletRequest request, int member_idx) {
-		Member member = memberService.selectMember(member_idx);	//파라미터 넘겨주면서 서비스에게 일 시키기 
+	public ModelAndView getMemberDetail(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("/admin/member/detail");
-		mav.addObject("member", member);
 		return mav;
 	}
 	
@@ -138,6 +132,10 @@ public class AdminController {
             return entity;
         } 
 
-	
+        @GetMapping("/qnaboard")
+        public ModelAndView getQanboard(HttpServletRequest request) {
+            ModelAndView mav=new ModelAndView("/admin/qnaboard/board_main");
+            return mav;
+        }
 	
 }

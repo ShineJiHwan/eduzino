@@ -24,8 +24,11 @@ public class RestTeacherController {
 	private OrderService orderService;
 	
 	
-	@PostMapping("/salescaculate/sales")
+	//매출조회
+	@PostMapping("/teacher/salescaculate/sales")
 	public List<OrderSummary> getSales(HttpServletRequest request, @RequestBody OrderSummary ordersummary){
+		
+		logger.info("넘겨받은 날짜"+ordersummary);
 		
 		List dateList = orderService.selectByDate(ordersummary);
 		

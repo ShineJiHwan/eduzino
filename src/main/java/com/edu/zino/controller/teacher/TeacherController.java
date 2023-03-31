@@ -19,8 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.edu.zino.domain.Member;
 import com.edu.zino.domain.OrderSummary;
 import com.edu.zino.domain.Subject;
+import com.edu.zino.domain.Teacher;
 import com.edu.zino.model.root.OrderService;
 import com.edu.zino.model.teacher.SubjectService;
+import com.edu.zino.model.teacher.TeacherService;
 
 //강사페이지 관련
 @Controller
@@ -32,6 +34,9 @@ public class TeacherController {
 	
 	@Autowired
 	private SubjectService subjectService;
+	
+	@Autowired
+	private TeacherService teacherService;
 	
 	
 	@GetMapping("/index")
@@ -54,6 +59,13 @@ public class TeacherController {
 	//매출, 정산내역
 	@GetMapping("/salescaculate/sales")
 	public ModelAndView getSales(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+        Member member = (Member)session.getAttribute("member");
+        
+        int teacher_member_idx = member.getMember_idx();
+        
+        Teacher teacher = teacherService.select(teacher_member_idx);
+        request.getSession().setAttribute("teacher", teacher);
 		ModelAndView mav = new ModelAndView("/teacher/salescaculate/sales");
 		return mav;
 	}
@@ -70,7 +82,11 @@ public class TeacherController {
 		HttpSession session = request.getSession();
         Member member = (Member)session.getAttribute("member");
         
-        int teacher_idx = member.getTeacher().getTeacher_idx();
+        int teacher_member_idx = member.getMember_idx();
+        
+        Teacher teacher = teacherService.select(teacher_member_idx);
+        int teacher_idx = teacher.getTeacher_idx();
+        
 		
 		List<OrderSummary> orderSummaryList = null;
 

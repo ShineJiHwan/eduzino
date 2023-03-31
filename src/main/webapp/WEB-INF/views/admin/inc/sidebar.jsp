@@ -66,7 +66,11 @@
       <div class="collapse" id="ui-basic3">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item">
-            <a class="nav-link" href="/admin/member/list">전체회원관리</a>
+            <a class="nav-link" href="/admin/member">전체회원관리</a>
+          </li>
+           
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/member/blacklist">정지회원관리</a>
           </li>
         </ul>
       </div>

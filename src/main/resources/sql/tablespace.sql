@@ -11,4 +11,7 @@ grant connect, resource to eduzino;
 --테이블스페이스 용량 변경
 alter database datafile 'C:\oraclexe\app\oracle\oradata\XE\eduzino.dbf'
 autoextend on next 100M maxsize 1024M;
+<<<<<<< HEAD
 
+=======
+>>>>>>> bfd8bceaf8fee1d3d667594b11c6542eb150be52

@@ -184,10 +184,14 @@
 	
   	//조회한 일별,월별,년별 데이터 받기
   	function getSales(start_date, end_date){
+		let json={};
 		let obj={};
 		
-  		obj['start_date']=start_date;
-  		obj['end_date']=end_date;
+		json['start_date']=start_date;
+		json['end_date']=end_date;
+		obj['OrderSummary']=json;
+  		
+  		console.log(obj);
 
 		$.ajax({
 			url:"/rest/teacher/salescaculate/sales",
@@ -233,11 +237,11 @@
 		let firstMonth;
 		let firstDay;
 		
-		
-		if(first.getDate() < 10){
-			firstMonth = '0'+(first.getMonth()+1);
-			firstDay = '0'+first.getDate();
+ 		if(first.getMonth() < 10){
+				firstMonth = '0'+(first.getMonth()+1);
+				firstDay = '0'+first.getDate();	
 		}
+		
 		let last = new Date(y,todayMonth,0);
 		
 		start_date = first.getFullYear()+firstMonth;

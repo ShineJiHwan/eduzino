@@ -130,46 +130,36 @@ public class RestCartController {
 		return entity;
 	}	
 	
-	//찜목록 장바구니에 등록
+	//찜목록 장바구니에 등록 > 여러 건 등록이 가능하도록 배열로 받는다
 	@PostMapping("/cart/wishTocart")
 	@ResponseBody
 	public ResponseEntity<String> toCart(HttpServletRequest request, @RequestBody Wish[] wishList){
 		Cart[] cartList=new Cart[wishList.length];
 		
+		//세션에서 해당 멤버의 정보를 가져온다 
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("member");
-		
-		//임시데이터
-		//Member member1=new Member();
-		//member1.setMember_idx(2);
-		
+	
+		//여러 건이라 반복문을 돌린다
 		for(int i=0; i<wishList.length; i++) {
 			Wish wish = new Wish();
 			wish= wishList[i];
 			
-			//logger.info("wish는? "+ wish);
-
 			Subject subject = new Subject();
 			subject.setSubject_idx(wish.getSubject().getSubject_idx());
-			
-			logger.info("subject는? " + subject);
-			
+						
 			Cart cart = new Cart();
 			cart.setSubject(subject);
 			cart.setMember(member);
 			
-			//logger.info("cart는 "+cart);
-			
 			cartList[i]=cart;
-			logger.info("cartList는 "+cartList[i]);
 		}		
-		
-		
-		//3단계
+			
+		//3단계 > service에서 insert 작업 진행한다
 		cartService.regist(cartList);
 		//logger.info("cartList는 "+cartList);
 		
-		//4단계
+		//4단계 > 원하는 메시지를 반환한다
 		MessageUtil msg = new MessageUtil();
 		msg.setMsg("장바구니 등록 성공");
 		

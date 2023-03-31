@@ -11,9 +11,6 @@ create sequence seq_birthday
 increment by 1
 start with 1;
 
-create sequence seq_profile_photo
-increment by 1
-start with 1;
 
 create sequence seq_email
 increment by 1
@@ -34,10 +31,6 @@ start with 1;
 create sequence seq_admin
 increment by 1
 start with 1;
-
-create sequence seq_grade
-increment by 1
-start with 1;;
 
 create sequence seq_top_category
 increment by 1

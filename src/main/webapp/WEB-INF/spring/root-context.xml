@@ -21,6 +21,13 @@
         id="dataSource" 
         jndi-name="jdbc/oracle"
         resource-ref="true"/>
+        
+     	<!-- 데이터베이스 종류 선택
+    <jee:jndi-lookup 
+        id="dataSource" 
+        jndi-name="jdbc/oracle"
+        resource-ref="true"/>  -->
+        
 	
 	<!-- 
 		트랜잭션 메니저 선택 (스프링이 지원하는...) 

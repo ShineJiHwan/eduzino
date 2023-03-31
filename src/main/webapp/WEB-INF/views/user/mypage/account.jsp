@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
 	Member member = (Member)session.getAttribute("member");
-	out.print(member);
+	//out.print(member);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +51,7 @@
                     <div class="container1">
 					  <div class="row ">
 					<div class="col-4">
-					    <img id="imgThumb" src="<%=member.getProfilePhoto().getProfile_photo() %>" width="200" height="200">
+					    <img id="imgThumb" src="/resources/user/mon.jpg" width="200" height="200">
 					           <span class="mask"></span>
 					</div>
 					  </div>
@@ -77,7 +77,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">이메일 :  </label>
                         <div class="col-sm-9">
-                            <input type="email" readonly class="form-control-plaintext" name="email" value="<%=member.getEmail().getEmail_addr()%>">
+                            <input type="email" readonly class="form-control-plaintext" name="email" value="<%//=member.getEmail().getEmail_addr()%>">
                         </div>
                     </div>
                     <div class="form-group row">

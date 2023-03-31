@@ -77,3 +77,5 @@ select * from subject;
 select * from member;
 desc teacher;
 
+insert into wish(wish_idx,member_idx,subject_idx) values(seq_wish.nextval,9,1);
+insert into cart(cart_idx,member_idx,subject_idx) values(seq_cart.nextval,9,2);

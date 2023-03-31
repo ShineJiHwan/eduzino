@@ -36,8 +36,8 @@ public class AdminLoginCheckAdvice {
 		String uri=request.getRequestURI(); 
 		
 		if(
-			uri.equals("/admin/rest/login/admin") ||  //비동기 로그인 요청시 제외
-			uri.equals("/admin/member/login") //동기방식으로 로그인 요청이 들어올때 제외 
+			uri.equals("/") ||  //메인페이지
+			uri.equals("/admin/login")  //로그인 
 		) {
 			result=joinPoint.proceed();
 		}else {

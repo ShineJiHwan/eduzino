@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.zino.domain.Goal;
+import com.edu.zino.domain.Member;
 import com.edu.zino.domain.Requirement;
 import com.edu.zino.domain.Subject;
 import com.edu.zino.domain.Teacher;
 import com.edu.zino.model.teacher.SubjectService;
+import com.edu.zino.model.teacher.TeacherService;
 import com.edu.zino.vo.StudyPlanVO;
 
 @Controller
@@ -33,12 +36,15 @@ public class SubjectController {
 	
 	@Autowired
 	private SubjectService subjectService;
+	@Autowired
+	private TeacherService teacherService;
 	
 	@GetMapping("/regist")
 	public ModelAndView registStart(HttpServletRequest request) {
 		Teacher teacher = (Teacher)request.getSession().getAttribute("teacher");
 		Subject subject = new Subject();
 		subject.setTeacher(teacher);
+		logger.info("teacher : "+teacher);
 		
 		subjectService.insert(subject);
 		

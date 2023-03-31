@@ -1,193 +1,170 @@
-<%@page import="com.edu.zino.domain.Member"%>
+<%@page import="com.edu.zino.domain.Member" %>
+<%@page import="com.edu.zino.domain.Email" %>
+<%@page import="com.edu.zino.domain.Birthday" %>
+<%@page import="com.edu.zino.domain.ProfilePhoto" %>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%
-	Member member = (Member)request.getAttribute("member");
+<% 
+	List<Member> memberList=(List)session.getAttribute("memberList");
 %>
 <!DOCTYPE html>
 <html>
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Admin-정지회원상세</title>
+    <title>Admin-blacklist</title>
     <!-- plugins:css -->
     <jsp:include page="../inc/header_link.jsp"></jsp:include>
-</head>
-
-<body>
+  </head>
+  <body>
     <div class="container-scroller">
-        <!-- partial:partials/_sidebar.html -->
-        <jsp:include page="../inc/sidebar.jsp"></jsp:include>
-        <!-- sidebar.html end  -->
-
-        <!-- partial  -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_settings-panel.html -->
-            <!-- partial -->
-            <!-- partial:partials/_navbar.html -->
-            <jsp:include page="../inc/navbar.jsp"></jsp:include>
-            <!-- partial -->
-            <div class="main-panel">
-                <div class="content-wrapper pb-0">
-
-                    <!-- *********************상단 버튼들 시작************************** -->
-                    <div class="page-header flex-wrap">
-                        <div class="header-left">
-                            <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Mail </button>
-                            <button class="btn btn-outline-primary bg-white mb-2 mb-md-0"> Excel </button>
-                        </div>
-                        <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                            <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                                <i class="mdi mdi-circle"></i> Add Prodcut </button>
-                        </div>
-                    </div>
-                    <!-- *********************상단 버튼들 끝************************** -->
-
-                    <!-- *********************회원 정보 시작************************** -->
-                    <h3 class="card-title mb-5">정지회원 상세정보</h3>
-                    <div class="row">
-                        <!-- *** 프로필 사진 *** -->
-                        <div class="col-md-3">
-                            <div style="width:200px">
-                                <img class="card-img-center" src="<%=member.getProfilePhoto().getProfile_photo() %>"
-                                    alt="Card image" style="width:100%">
-                            </div>
-                        </div>
-                        <!-- *** 상세정보 *** -->
-                        <div class="col-md-9">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form class="forms-sample" id="form1">
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">닉네임 :  </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" readonly class="form-control-plaintext" name="nickname" value="<%=member.getMember_nickname() %>" >
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">이메일 :  </label>
-                                            <div class="col-sm-9">
-                                                <input type="email" readonly class="form-control-plaintext" name="email" value="<%=member.getEmail().getEmail_addr()%>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">가입형태 : </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" readonly class="form-control-plaintext" name="age" value="<%=member.getSns().getSns_type()%>">
-                                            </div>
-                                        </div>
-	                                        <div class="form-group row">
-	                                            <label class="col-sm-2 col-form-label">정지일</label>
-	                                            <div class="col-sm-7">
-	                                                <input type="text" class="form-control" id="regdate" value="<%=member.getBlacklist().getPause() %>">
-	                                            </div>
-	                                        </div>
-	
-	            <!-- * * * * * * * * * * * * * * * * * * * * * * * *  -->
-	                                        <div class="form-group row">
-	                                            <label class="col-sm-2 col-form-label">정지사유</label>
-	                                            <div class="col-sm-7">
-	                                            	<textarea class="form-control" id="memo" rows="4"><%= member.getBlacklist().getBlacklist_memo() %></textarea>
-	                                            </div>
-	                                            <div class="col-sm-3">
-	                                                <button type="button" class="btn btn-outline-danger btn-icon-text" data-toggle="modal" data-target="#blackModal">
-	                                                	<i class="mdi mdi-lead-pencil"></i> 수정하기 </button>
-	                                                <!-- The Modal -->
-	                                                <div class="modal fade" id="blackModal">
-														<div class="modal-dialog modal-dialog-centered">
-															<div class="modal-content">
-	
-	                                                            <!-- Modal Header -->
-	                                                            <div class="modal-header">
-	                                                                <h4 class="modal-title">회원 계정 정지</h4>
-	                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-	                                                            </div>
-	
-	                                                            <!-- Modal body -->
-	                                                            <div class="modal-body">
-																	<div class="form-group row">
-																	    <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label"> 정지 사유:</label>
-																	    <div class="col-sm-9">
-																	    	<textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-																	    </div>
-																	</div>																
-	                                                            </div>
-	
-	                                                            <!-- Modal footer -->
-	                                                            <div class="modal-footer">
-		                                                            <button type="button" class="btn btn-secondary" id="bt_edit"> 저장하기</button>
-	                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"> 나가기 </button>
-	                                                            </div>
-	
-	                                                        </div>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                        <button type="button" class="btn btn-primary mr-2" id="bt_delblack"> 정지해제 </button>
-	                                        <button type="button" class="btn btn-light" id="bt_list">목록으로</button>
-	                                    </form>
-	                                </div>
-	                            </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- 회원 테이블 -->
-                    <!-- **********************회원 정보 끝************************** -->
-
-                </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
-                <jsp:include page="../inc/footer.jsp"></jsp:include>
-                <!-- partial:partials/_footer.html end -->
-                <!-- partial -->
-            </div>
-            <!-- main-panel ends -->
+      <!-- partial:partials/_sidebar.html -->
+      <jsp:include page="../inc/sidebar.jsp"></jsp:include>
+      <!-- sidebar.html end  -->
+      
+      <!-- partial  -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        <!-- partial -->
+        <!-- partial:partials/_navbar.html -->
+        <jsp:include page="../inc/navbar.jsp"></jsp:include>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper pb-0">
+          
+	<!-- *********************상단 버튼들************************** -->
+      <div class="page-header flex-wrap">
+        <div class="header-left">
+        <button type="button" class="btn btn-outline-danger btn-icon-text">
+                            <i class="mdi mdi-download btn-icon-sm"></i> Download </button>
+       <button type="button" class="btn btn-outline-primary btn-icon-text">
+                            <i class="mdi mdi-email-variant btn-icon-prepend"></i> Send Mail </button>
         </div>
-        <!-- partial end  -->
-        <!-- page-body-wrapper ends -->
+      </div>
+	<!-- *********************상단 버튼들************************** -->
+            
+	<!-- **********************회원 테이블************************** -->
+	
+	<div class="card-body"  >
+		<h4 class="card-title">Striped Table</h4>
+		<div class="table-responsive">
+			<table class="table table-striped">
+	<!-- - - - - - - - - -컬럼명 - - - - - - - - - - - -->	
+				<thead>
+					<tr>
+						<th>회원</th>
+						<th>닉네임</th>
+						<th>메일</th>
+						<th>정지사유</th>
+						<th>정지일</th>
+					</tr>
+				</thead>
+	<!-- - - - -디비에 저장된 회원들이 출력 될 곳 - - - - - - -->			
+				<tbody>
+					<tr>
+						<td class="py-1">
+							<img src="/resources/user/images/o.jpg" alt="image">
+						</td>
+						<td @click="getDetail(obj.member_idx)"><a href="#">catt</a></td>
+						<td>dokk126@gmail.com</td>
+						<td>회원 비방</td>
+						<td>2023-03-29 02:58:17.0</td>
+					</tr>	
+					<tr>
+						<td class="py-1">
+							<img src="/resources/user/images/4.jpg" alt="image">
+						</td>
+						<td @click="getDetail(obj.member_idx)"><a href="#">ya ay</a></td>
+						<td>yuna0118@gmail.com</td>
+						<td>영업 시도</td>
+						<td>2023-03-28 07:44:42.0</td>
+					</tr>			
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	
+	<!-- **********************회원 테이블************************** -->
+
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+		  	<jsp:include page="../inc/footer.jsp"></jsp:include>
+          <!-- partial:partials/_footer.html end -->
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- partial end  -->
+      <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <jsp:include page="../inc/footer_link.jsp"></jsp:include>
+		<jsp:include page="../inc/footer_link.jsp"></jsp:include>
     <!-- plugins:js end -->
     <!-- End custom js for this page -->
-</body>
-
+  </body>
 <script type="text/javascript">
+let app1;
+const row={
+	template:`
+	<tr>
+		<td class="py-1">
+			<img src="../../assets/images/faces-clipart/pic-1.png" alt="image">
+		</td>
+		<td @click="getDetail(obj.member_idx)"><a href="#">{{obj.member_nickname}}</a></td>
+		<td>{{obj.email.email_addr}}</td>
+		<td>{{obj.blacklist.blacklist_memo}}</td>
+		<td> {{obj.blacklist.pause}}</td>
+	</tr>
+	`, 
+	props:['member'],
+	data(){
+		return {
+			obj:this.member
+			
+		};	
+		
+	}, 
+	methods:{
+		getDetail:function(member_idx){
+			alert(member_idx);
+			location.href="/admin/member/detail?member_idx="+member_idx;
+		}
+	}
+};
 
-$(function(){
-	//정지 사유 수정하기
-	 $("#bt_edit").click(function(){
-		 if(confirm("사유를 수정하시겠어요?")){
-			$("#form1").attr({
-				// action:"/admin/member/{blacklist_idx}",
-				 method:"delete"		
-			 });
-			 $("#form1").submit();	
-		}	
-	 });
-	 
-	//정지 해제하기
-	 $("#bt_delblack").click(function() {
-			if(confirm("정지 상태를 해제하시겠어요?")){
-				$("#form1").attr({
-					// action:"/admin/member/{blacklist_idx}",
-					 method:"delete"		
-				 });
-				 $("#form1").submit();	
-			}
-		});
-	 
-	//정지회원 목록으로 
-	 $("#bt_list").click(function(){
-			location.href="/admin/member/blacklist";
+
+//목록가져오기 
+function getList(){
+	$.ajax({
+		url:"/admin/rest/member/blacklist",
+		type:"get",
+		success:function(result, status, xhr){
+			console.log("서버에서 전송된 결과 : ", result);
+			app1.memberList=result;
+		}
+	});	
+}
+
+function init(){
+	app1=new Vue({
+		el:"#app1", 
+		components:{
+			row
+		},
+		data:{
+			memberList:[]
+		}
 	});
+}
+
+
+$(function () {
+	init();
+	getList();
 });
-
-
-
 </script>
 </html>

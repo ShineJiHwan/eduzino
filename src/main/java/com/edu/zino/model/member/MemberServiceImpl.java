@@ -65,6 +65,8 @@ public class MemberServiceImpl implements MemberService{
 	public void insert(Member member)throws MemberException, EmailException, ProfilePhotoException, BirthdayException {
 		memberDAO.insert(member);		//selectKey가 실행돼서 idx가 채워져서 오면... 
 		
+		logger.info("멤버서비스 "+member);
+		
 		member.getEmail().setMember(member); //서로에게 심어줘야 했음 
 		member.getProfilePhoto().setMember(member);
 		

@@ -43,10 +43,6 @@
                             <button type="button" class="btn btn-outline-primary btn-icon-text">
                                 <i class="mdi mdi-email-variant btn-icon-prepend"></i> Send Mail </button>
                         </div>
-                        <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                            <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                                <i class="mdi mdi-circle"></i> Add Prodcut </button>
-                        </div>
                     </div>
                     <!-- *********************상단 버튼들************************** -->
 
@@ -68,9 +64,53 @@
                                 </thead>
                                 <!-- - - - -디비에 저장된 회원들이 출력 될 곳 - - - - - - -->
                                 <tbody>
-                                	<template v-for="member in memberList">
-                                		<row :key="member.member_idx" :member="member"/>
-                                	</template>
+                                <tr>
+        <td class="py-1">
+           <img src="/resources/user/images/c-1.png" alt="image">
+        </td>
+        <td><a href="/admin/member/detail">yeon</a></td>
+        <td>google</td>
+        <td>eddu77@gmail.com</td>
+        <td>
+            <label class="badge badge-info">활동회원</label>
+        </td>
+    </tr>
+<tr>
+                                	<tr>
+        <td class="py-1">
+           <img src="/resources/user/images/c-1.png" alt="image">
+        </td>
+        <td><a href="/admin/member/detail">do an</a></td>
+        <td>google</td>
+        <td>dokyy1226@gmail.com</td>
+        <td>
+            <label class="badge badge-info">활동회원</label>
+        </td>
+    </tr>
+<tr>
+        <td class="py-1">
+           <img src="/resources/user/images/c-2.png" alt="image">
+        </td>
+        <td><a href="/admin/member/detail">gogo</a></td>
+        <td>google</td>
+        <td>dhodkseho11@gmail.com</td>
+        <td>
+            <label class="badge badge-info">활동회원</label>
+        </td>
+    </tr>
+
+<tr>
+        <td class="py-1">
+           <img src="/resources/user/images/c-3.png" alt="image">
+        </td>
+        <td><a href="/admin/member/detail">YNA</a></td>
+        <td>google</td>
+        <td>yuna0118@gmail.com</td>
+        <td>
+            <label class="badge badge-info">활동회원</label>
+        </td>
+    </tr>
+<tr>
                                 </tbody>
                             </table>
                         </div>
@@ -100,69 +140,7 @@
 </body>
 
 <script type="text/javascript">
-let app1;
-const row={
-	template:`
-	 <tr>
-        <td class="py-1">
-            <img :src=" '{{obj.profilePhoto.profile_photo}}' " alt="image">
-        </td>
-        <td @click="getDetail(obj.member_idx)"><a href="#">{{obj.member_nickname}}</a></td>
-        <td>{{obj.sns.sns_type}}</td>
-        <td>{{obj.email.email_addr}}</td>
-        <td>
-            <label class="badge badge-info">활동회원</label>
-        </td>
-    </tr>
-	`, 
-	props:['member'],
-	data(){
-		return {
-			obj:this.member,
-		};	
-		
-	
-		
-	}, 
-	methods:{
-		getDetail:function(member_idx){
-			alert(member_idx);
-			location.href="/admin/member/detail?member_idx="+member_idx;
-		}
-	}
-};
 
-
-
-//목록가져오기 
-function getList(){
-	$.ajax({
-		url:"/admin/rest/member",
-		type:"get",
-		success:function(result, status, xhr){
-			console.log("서버에서 전송된 결과 : ", result);
-			app1.memberList=result;
-		}
-	});	
-}
-
-function init(){
-	app1=new Vue({
-		el:"#app1", 
-		components:{
-			row
-		},
-		data:{
-			memberList:[]
-		}
-	});
-}
-
-
-$(function () {
-	init();
-	getList();
-});
 </script>
 
 </html>
