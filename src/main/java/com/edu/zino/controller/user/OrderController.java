@@ -6,6 +6,7 @@ import java.net.URI;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,12 +40,12 @@ public class OrderController {
 	@GetMapping("/order/orderlist")
 	public ModelAndView getOrderList(HttpServletRequest request, Member member) {
 		
-		//HttpSession session = request.getSession();
-		//Member member = (Member)session.getAttribute("member");
+		HttpSession session = request.getSession();
+		Member member1= (Member)session.getAttribute("member");
 		
 		//임시 member데이터
-		Member member1 = new Member();
-		member1.setMember_idx(2);
+		//Member member1 = new Member();
+		//member1.setMember_idx(2);
 		
 		//3단계
 		List<Member> orderList = orderService.selectAllByMember(member1);

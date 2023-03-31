@@ -31,7 +31,7 @@ public class UserLoginCheckAdvice {
 			}
 		}
 		
-		logger.info(request.getRequestURI());
+		
 		
 		//로그인을 체크해야 되는 경우와, 그냥 보내야 하는경우를 나눈다 
 		String uri=request.getRequestURI(); 
@@ -50,7 +50,9 @@ public class UserLoginCheckAdvice {
 			
 			uri.equals("/member/authform/google") ||
 			uri.equals("/member/authform/kakao") ||
-			uri.equals("/member/authform/naver")
+			uri.equals("/member/authform/naver") 
+			
+			
 		) {
 			result=joinPoint.proceed();
 		}else {

@@ -553,7 +553,7 @@ function connect(chat){
 	/*------------------------------------------------------------------------------------------*/
 	
 	$(function(){
-		selectShowHide(flag); //기본 : 채팅방검색
+		//selectShowHide(flag); //기본 : 채팅방검색
 		//connect();
 		getChatRooms(); //채팅방리스트 조회
 		

@@ -36,14 +36,13 @@ public class AdminLoginCheckAdvice {
 		String uri=request.getRequestURI(); 
 		
 		if(
-			uri.equals("/admin/rest/login/admin") ||  //비동기 로그인 요청시 제외
-			uri.equals("/admin/member/login") //동기방식으로 로그인 요청이 들어올때 제외 
+			uri.equals("/") ||  //메인페이지
+			uri.equals("/admin/login")  //로그인 
 		) {
 			result=joinPoint.proceed();
 		}else {
 			//로그인이 필요한 서비스에서만 아래의 코드들이 수행되어야 한다..
 			session = request.getSession();
-			
 			if(session.getAttribute("admin")==null) {
 				logger.info("aop 에 의한 로그인 체크 : 세션없음");
 				throw new AdminException("로그인이 필요한 서비스입니다");

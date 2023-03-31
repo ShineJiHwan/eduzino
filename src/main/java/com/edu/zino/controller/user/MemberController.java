@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,8 +25,10 @@ import com.edu.zino.domain.Email;
 import com.edu.zino.domain.Member;
 import com.edu.zino.domain.ProfilePhoto;
 import com.edu.zino.domain.Sns;
+import com.edu.zino.domain.Teacher;
 import com.edu.zino.model.member.MemberService;
 import com.edu.zino.model.member.SnsService;
+import com.edu.zino.model.teacher.TeacherService;
 import com.edu.zino.snslogin.GoogleLogin;
 import com.edu.zino.snslogin.GoogleOAuthToken;
 import com.edu.zino.snslogin.KaKaoLogin;
@@ -60,6 +61,9 @@ public class MemberController {
 	
 	@Autowired
 	private NaverLogin naverLogin;
+	
+	@Autowired
+	private TeacherService teacherService;
 	
 	//회원가입, 로그인 폼 요청처리
 	@GetMapping("/member/loginform")
@@ -539,7 +543,8 @@ public class MemberController {
 			Member member = memberService.selectById(id);
 			
 //------------------------------db에 들어가는 타이밍------------------------------------------------------------
-			
+			Teacher teacher = teacherService.select(1);
+			session.setAttribute("teacher", teacher);
 			if(member==null) {
 				//회원여부를 판단. 이미 db에 이 회원의 식별 고유 id가 존재할 경우 회원가입을 처리해주자 (서비스의 insert) 세션에 담자 
 				
@@ -569,6 +574,13 @@ public class MemberController {
 				logger.info("넣을 프로필사진 : " + profilePhoto);
 				logger.info("넣을 연령대 : " + birthday);
 				logger.info("넣을 snsType: " + sns);
+				logger.info("member : "+member);
+				int teacher_member_idx = member.getMember_idx();
+		        logger.info("teacher : "+teacher);
+		        if(teacher != null) {
+		        	member.setTeacher(teacher);
+		        	session.setAttribute("teacher", teacher);
+		        }
 				
 				//다 채워졌으면 이제 서비스에게 일을 시킴 -> 여길 지나면 member_idx가 생성됨
 				memberService.insert(member);
@@ -599,10 +611,11 @@ public class MemberController {
 				logger.info("넣을 프로필사진 : " + profilePhoto);
 				logger.info("넣을 연령대 : " + birthday);
 				logger.info("넣을 snsType: " + sns);
+				
 			}
 			//세션에 담기 (로그인 할 수 있게)
 			session.setAttribute("member", member);
-			
+	        
 			ModelAndView mav = new ModelAndView("redirect:/");
 			
 			return mav;

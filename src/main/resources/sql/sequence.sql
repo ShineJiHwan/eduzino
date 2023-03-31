@@ -16,6 +16,10 @@ create sequence seq_email
 increment by 1
 start with 1;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> d3a887a46970b7813e627528ed6d717383038bc9
 create sequence seq_teacher
 increment by 1
 start with 1;

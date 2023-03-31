@@ -51,7 +51,7 @@
                     <div class="container1">
 					  <div class="row ">
 					<div class="col-4">
-					    <img id="imgThumb" src="<%//=member.getProfilePhoto().getProfile_photo() %>" width="200" height="200">
+					    <img id="imgThumb" src="/resources/user/mon.jpg" width="200" height="200">
 					           <span class="mask"></span>
 					</div>
 					  </div>

@@ -1,11 +1,11 @@
 
 
 CREATE TABLE member (
-	member_idx	number		NOT NULL,
-	member_nickname	varchar2(100)		,
-	member_regdate	date	default sysdate	,
-	member_id	varchar2(30) NOT NULL,
-	sns_name_idx	number NOT NULL
+	member_idx number  NOT NULL,
+	member_nickname varchar2(100)		,
+	member_regdate date default sysdate	,
+	member_id varchar2(30) NOT NULL,
+	sns_name_idx number NOT NULL
 );
 
 
@@ -17,93 +17,107 @@ CREATE TABLE sns_name(
 
 CREATE TABLE birthday(
 	birthday_idx number primary key,
-	member_idx	number		NOT NULL,
+	member_idx number	 NOT NULL,
 	birthday varchar2(30) 
 );
 
 CREATE TABLE profile_photo(
 	profile_photo_idx number primary key,
-	member_idx	number		NOT NULL,
+	member_idx number	 NOT NULL,
 	profile_photo varchar2(50) 
 );
 
 CREATE TABLE email(
 	email_idx number primary key,
-	member_idx	number		NOT NULL,
+	member_idx number NOT NULL,
 	email varchar2(30) 
 );
 
 CREATE TABLE teacher (
-	teacher_idx	number		NOT NULL,
-	member_idx	number		NOT NULL
+	teacher_idx number	 NOT NULL,
+	member_idx number	 NOT NULL
 );
 
 CREATE TABLE blacklist (
-	blacklist_idx	number		NOT NULL,
-	pause	 date		,
-	blacklist_memo	clob		,
-	member_idx	number		NOT NULL
+	blacklist_id number NOT NULL,
+	pause date,
+	blacklist_memo	 clob ,
+	member_idx number	 NOT NULL
 );
 
 CREATE TABLE admin (
+<<<<<<< HEAD
+	admin_idx	 number NOT NULL,
+	admin_id varchar2(100)		,
+	admin_pass varchar2(64)		,
+	grade_idx number not null,
+	rank_idx number not null
+);
+
+CREATE TABLE grade (
+	grade_idx number	 NOT NULL,
+	grade_rank number NULL
+);
+=======
 	admin_idx	number		NOT NULL,
 	admin_id	varchar2(100)		,
 	admin_pass	varchar2(64)		,
 );
 
+>>>>>>> bfd8bceaf8fee1d3d667594b11c6542eb150be52
 
 
 CREATE TABLE top_category (
-	top_category_idx	number		NOT NULL,
-	top_name	varchar2(30)		NULL
+	top_category_idx number NOT NULL,
+	top_name varchar2(30) NULL
 );
 
 CREATE TABLE mid_category (
-	mid_category_idx	number		NOT NULL,
-	mid_name	varchar2(30)		NULL,
-	top_category_idx	number		NOT NULL
+	mid_category_idx number	 NOT NULL,
+	mid_name varchar2(30) NULL,
+	top_category_idx number NOT NULL
 );
 
 CREATE TABLE section (
-	section_idx	number		NOT NULL,
-	section_name	varchar2(200)		NULL,
-	subject_idx	number		NOT NULL
+	section_idx number NOT NULL,
+	section_name varchar2(200) NULL,
+	subject_idx number NOT NULL
 );
 
 CREATE TABLE sub_category (
-	sub_category_idx	number		NOT NULL,
-	sub_name	varchar2(30)		NULL,
-	mid_category_idx	number		NOT NULL
+	sub_category_idx number	 NOT NULL,
+	sub_name varchar2(30)	 NULL,
+	mid_category_idx number NOT NULL
 );
 
 CREATE TABLE movie (
-	movie_idx	number		NOT NULL,
-	movie_name	varchar2(100)		NULL,
-	movie_link	varchar2(200)		NULL,
-	section_idx	number		NOT NULL
+	movie_idx number NOT NULL,
+	movie_name varchar2(100) NULL,
+	movie_link varchar2(200) NULL,
+	section_idx number NOT NULL
 );
 
 CREATE TABLE goal (
-	goal_idx	number		NOT NULL,
-	goal_name	varchar2(200)		NULL,
-	subject_idx	number		NOT NULL
+	goal_idx number NOT NULL,
+	goal_name varchar2(200) NULL,
+	subject_idx number NOT NULL
 );
 
 CREATE TABLE requirement (
-	requirement_idx	number		NOT NULL,
-	requirement_name	varchar2(200)		NULL,
-	subject_idx	number		NOT NULL
+	requirement_idx number NOT NULL,
+	requirement_name varchar2(200) NULL,
+	subject_idx number NOT NULL
 );
 
 CREATE TABLE subject (
-	subject_idx	number		NOT NULL,
-	subject_title	varchar2(200)		NULL,
-	subject_subTitle	clob		NULL,
-	subject_pic	varchar2(30)		NULL,
-	subject_price	number		NULL,
-	subject_detail	clob		NULL,
-	teacher_idx	number		NOT NULL,
-	sub_category_idx	number		NOT NULL
+	subject_idx number NOT NULL,
+	subject_title varchar2(200) NULL,
+	subject_subTitle clob NULL,
+	subject_pic varchar2(30) NULL,
+	subject_price number NULL,
+	subject_detail clob	 NULL,
+	teacher_idx number NOT NULL,
+	sub_category_idx number NOT NULL
 );
 
 CREATE TABLE cart (
@@ -156,29 +170,29 @@ CREATE TABLE chat (
 
 
 CREATE TABLE review (
-	review_idx	number		NOT NULL,
-	review_rate	number		NULL,
-	review_content	clob		NULL,
-	review_regdate	date		NULL,
-	member_idx	number		NOT NULL,
-	subject_idx	number		NOT NULL
+	review_idx number NOT NULL,
+	review_rate number NULL,
+	review_content clob NULL,
+	review_regdate date NULL,
+	member_idx number NOT NULL,
+	subject_idx number NOT NULL
 );
 
 review ON COLUMN review.reviews_rate IS '강의 평점';
 
 CREATE TABLE adminboard (
-	adminboard_idx	number		NOT NULL,
-	adminboard_title	varchar2(200)		NULL,
-	adminboard_content	clob		NULL,
-	adminboard_regdate	date		NULL,
-	target_idx	number		NOT NULL,
-	admin_idx	number		NOT NULL,
-	adminboard_sort	number		NULL
+	adminboard_idx number NOT NULL,
+	adminboard_title varchar2(200) NULL,
+	adminboard_content clob NULL,
+	adminboard_regdate date NULL,
+	target_idx number NOT NULL,
+	admin_idx number NOT NULL,
+	adminboard_sort number NULL
 );
 
 CREATE TABLE target (
-	target_idx	number		NOT NULL,
-	userType	varchar2(10)		NULL
+	target_idx number NOT NULL,
+	userType varchar2(10) NULL
 );
 
 review ON COLUMN target.userType IS '1 : 모두에게
@@ -186,21 +200,22 @@ review ON COLUMN target.userType IS '1 : 모두에게
 3 : 유저에게';
 
 CREATE TABLE teacherboard (
-	teacherboard_idx	number		NOT NULL,
-	teacherboard_title	varchar2(200)		NULL,
-	teacherboard_content	clob		NULL,
-	teacherboard_regdate	date		NULL,
-	teacher_idx	number		NOT NULL,
-	teacherboard_sort	number		NULL
+	teacherboard_idx number NOT NULL,
+	teacherboard_title varchar2(200) NULL,
+	teacherboard_content clob NULL,
+	teacherboard_regdate date default sysdate NULL,
+	teacher_idx number NOT NULL,
+	teacherboard_sort number NULL
 );
 
 CREATE TABLE message (
-	message_idx	number		NOT NULL,
-	message_content		clob		,
-	message_regdate	date	default sysdate	,
-	message_check	number	DEFAULT 0	NULL,
-	chat_idx	number		NOT NULL,
-	me 	number		,
+<<<<<<< HEAD
+	message_idx number NOT NULL,
+	message_content clob		,
+	message_regdate date default sysdate	,
+	message_check number DEFAULT 0 NULL,
+	chat_idx number NOT NULL,
+	me  number		,
 	you	number		
 );
 

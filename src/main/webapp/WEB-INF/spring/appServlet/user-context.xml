@@ -29,6 +29,7 @@
 	<context:component-scan base-package="com.edu.zino.controller.user" />
 	
 	<context:component-scan base-package="com.edu.zino.controller.root" />
+	<context:component-scan base-package="com.edu.zino.controller.video" />
 	
 	<context:component-scan base-package="com.edu.zino.chat" />
 	
@@ -43,18 +44,18 @@
 		</websocket:handshake-interceptors>				
 	</websocket:handlers> 
 	
-	<!-- aop 처리-->
+	<!-- aop 처리
 	<beans:bean id="userLoginCheckAdvice" class="com.edu.zino.aop.UserLoginCheckAdvice"/>
 	<aop:config>
 		<aop:aspect ref="userLoginCheckAdvice">
 			<aop:pointcut expression="execution(public * com.edu.zino.controller.user..*(..))" id="userLoginCheckPointcut"/>
 			<aop:around method="sessionCheck" pointcut-ref="userLoginCheckPointcut"/>
 		</aop:aspect>
-	</aop:config>
+	</aop:config>-->
 	
-	<!-- 글로벌 예외 jsp로 결과를 보여주는 예외객체 -->
+	<!-- 글로벌 예외 jsp로 결과를 보여주는 예외객체
 	<beans:bean
 		id="userGlobalException"
-		class="com.edu.zino.aop.UserGlobalException"/>	
+		class="com.edu.zino.aop.UserGlobalException"/>	 -->
 	
 </beans:beans>

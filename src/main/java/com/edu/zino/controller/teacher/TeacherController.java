@@ -59,6 +59,13 @@ public class TeacherController {
 	//매출, 정산내역
 	@GetMapping("/salescaculate/sales")
 	public ModelAndView getSales(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+        Member member = (Member)session.getAttribute("member");
+        
+        int teacher_member_idx = member.getMember_idx();
+        
+        Teacher teacher = teacherService.select(teacher_member_idx);
+        request.getSession().setAttribute("teacher", teacher);
 		ModelAndView mav = new ModelAndView("/teacher/salescaculate/sales");
 		return mav;
 	}

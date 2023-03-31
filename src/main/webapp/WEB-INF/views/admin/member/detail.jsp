@@ -1,8 +1,5 @@
-<%@page import="com.edu.zino.domain.Member"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%
-	Member member = (Member)request.getAttribute("member");
-%>
+
 <!DOCTYPE html>
 <html>
 
@@ -37,10 +34,7 @@
                             <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Mail </button>
                             <button class="btn btn-outline-primary bg-white mb-2 mb-md-0"> Excel </button>
                         </div>
-                        <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                            <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                                <i class="mdi mdi-circle"></i> Add Prodcut </button>
-                        </div>
+                        
                     </div>
                     <!-- *********************상단 버튼들 끝************************** -->
 
@@ -50,7 +44,7 @@
                         <!-- *** 프로필 사진 *** -->
                         <div class="col-md-3">
                             <div style="width:200px">
-                                <img class="card-img-center" src="<%=member.getProfilePhoto().getProfile_photo() %>"
+                                <img class="card-img-center" src="/resources/user/mon.jpg "
                                     alt="Card image" style="width:100%">
                             </div>
                         </div>
@@ -62,25 +56,25 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">닉네임 :  </label>
                                             <div class="col-sm-9">
-                                                <input type="text" readonly class="form-control-plaintext" name="nickname" value="<%=member.getMember_nickname() %>" >
+                                                <input type="text" readonly class="form-control-plaintext" name="nickname" value="do an" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">이메일 :  </label>
                                             <div class="col-sm-9">
-                                                <input type="email" readonly class="form-control-plaintext" name="email" value="<%=member.getEmail().getEmail_addr()%>">
+                                                <input type="email" readonly class="form-control-plaintext" name="email" value="dokyy1226@gmail.com">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">가입형태 : </label>
                                             <div class="col-sm-9">
-                                                <input type="text" readonly class="form-control-plaintext" name="age" value="<%=member.getSns().getSns_type()%>">
+                                                <input type="text" readonly class="form-control-plaintext" name="age" value="google">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">가입일 :</label>
                                             <div class="col-sm-9">
-                                                <input type="text" readonly class="form-control-plaintext" name="regdate" value="<%=member.getMember_regdate() %>">
+                                                <input type="text" readonly class="form-control-plaintext" name="regdate" value="2023-03-30 14:59:10.0">
                                             </div>
                                         </div>
             <!-- * * * * * * * * * * * * * * * * * * * * * * * *  -->
@@ -158,42 +152,18 @@
 </body>
 <script type="text/javascript">
 let json;
+
+
 function toTeacher(){
-	if(confirm("해당 계정을 강사로 전환하시겠어요?")){
-	$.ajax({
-		method:"get",
-		url:"/admin/member/toteacher",
-		data:{
-			"member_idx":<%=member.getMember_idx()%>
-		},
-		success: function(data, status, xhr){
-			console.log(data);
-			
-			json=JSON.parse(data);
-			console.log(json);
-				
-			}
-		});
+	if(confirm("강사로 전환하시겠습니까?")){
+		location.href="/admin/member/detail";	
 	}
 }
 
+
 function toBlacklist(){
 	if(confirm("해당 계정을 정지하시겠어요?")){
-	$.ajax({
-		method:"post",
-		url:"/admin/member/blacklist",
-		data:{
-			"member_idx":<%=member.getMember_idx()%>
-		
-		},
-		success: function(data, status, xhr){
-			console.log(data);
-			
-			json=JSON.parse(data);
-			console.log(json);
-				
-			}
-		});
+		location.href="/admin/member/detail";
 	}
 }
 

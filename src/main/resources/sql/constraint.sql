@@ -1,5 +1,12 @@
 -- fk 제약조건
+<<<<<<< HEAD
+ALTER TABLE member ADD CONSTRAINT FK_sns_name_TO_member_1 FOREIGN KEY (
+
+	social_login_idx
+
+=======
 ALTER TABLE member ADD CONSTRAINT FK_sns_TO_member_1 FOREIGN KEY (
+>>>>>>> bfd8bceaf8fee1d3d667594b11c6542eb150be52
 	sns_idx
 )
 REFERENCES sns (
